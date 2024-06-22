@@ -13,8 +13,18 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontSize: {
+        'phone-md': '0.75rem',
+        'phone-sm': '0.50rem',
+      }
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: [
+      'dracula',
+      'light',
+    ]
+  },
+  plugins: [require('daisyui')],
 }
 export default config

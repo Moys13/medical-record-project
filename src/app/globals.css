@@ -2,26 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+@layer components {
+    .btn-blue {
+        @apply rounded-md bg-blue-400 py-1 px-3 hover:bg-blue-500;
+    }
+    .btn-red {
+        @apply rounded-md bg-red-400 py-1 px-3 hover:bg-red-500;
+    }
+    .card-dashboard {
+        @apply bg-blue-700 md:h-fit h-16 rounded-xl md:p-3 py-3 md:text-base;
+    }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
