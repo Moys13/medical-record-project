@@ -2,22 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .btn-blue {
-        @apply rounded-md bg-blue-400 py-1 px-3 hover:bg-blue-500;
-    }
-    .btn-red {
-        @apply rounded-md bg-red-400 py-1 px-3 hover:bg-red-500;
-    }
-    .card-dashboard {
-        @apply bg-blue-700 md:h-fit h-16 rounded-xl md:p-3 py-3 md:text-base;
-    }
+  .btn-blue {
+    @apply rounded-md bg-blue-400 py-1 px-3 hover:bg-blue-500;
+  }
+  .btn-red {
+    @apply rounded-md bg-red-400 py-1 px-3 hover:bg-red-500;
+  }
+  .card-dashboard {
+    @apply bg-blue-700 md:h-fit h-16 rounded-xl md:p-3 py-3 md:text-base;
+  }
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
+  overflow: hidden;
 }
