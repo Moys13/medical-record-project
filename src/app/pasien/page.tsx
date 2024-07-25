@@ -1,5 +1,5 @@
 "use client";
-import { SyntheticEvent, useReducer, useState } from "react";
+import { useState } from "react";
 import Modal from "@/components/Modal";
 import { useRouter } from "next/navigation";
 import NormAuto from "../../libs/normAuto";
@@ -39,17 +39,12 @@ const golonganDarah = [
 const Pasien = () => {
   const router = useRouter();
 
-  const test = async () => {
-    await NormAuto();
-  };
-
   const [alert, setAlert] = useState(false);
   const [modal, setModal] = useState(false);
   const [tahun, setTahun] = useState(0);
   const [bulan, setBulan] = useState(0);
   const [hari, setHari] = useState(0);
 
-  const handleModalOpen = () => setModal(true);
   const handleModalClose = () => setModal(false);
 
   const handleAge = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,8 +71,6 @@ const Pasien = () => {
     setHari(days);
     setValue("tglLahir", e.target.value, { shouldValidate: true });
   };
-
-  const saveHandler = async (data: Pasien) => {};
 
   const {
     register,

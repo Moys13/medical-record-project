@@ -10,7 +10,9 @@ export const GET = async () => {
   try {
     const pasien = await prisma.pasien.findMany();
     if (pasien.length === 0) {
-      return Response.json(ApiResponseHandle(404, pasien, "Empty"));
+      return Response.json(ApiResponseHandle(404, pasien, "Empty"), {
+        status: 404,
+      });
     }
     return Response.json(ApiResponseHandle(200, pasien, "Success"), {
       status: 200,

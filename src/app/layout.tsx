@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Slidebar from "@/components/Slidebar";
-import Navbar from "@/components/navbar";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,15 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
-        <div className="overflow-hidden">
-          <Navbar />
-          <div className="flex">
-            <Slidebar />
-            <div className="p-5 h-[calc(100vh-3rem)] overflow-auto w-full">
-              {children}
-            </div>
-          </div>
-        </div>
+        <main>{children}</main>
       </body>
     </html>
   );

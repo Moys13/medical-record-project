@@ -32,7 +32,9 @@ const TablePasien = async () => {
               <th className="px-2 py-1">Action</th>
             </tr>
           </thead>
-          {patients.statusCode === 500 || patients.statusCode === 404 ? (
+          {patients.statusCode === 500 ||
+          patients.statusCode === 404 ||
+          patients.statusCode === 401 ? (
             <tbody>
               <tr>
                 <td className="text-center" colSpan={8}>

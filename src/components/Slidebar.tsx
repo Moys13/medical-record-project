@@ -1,12 +1,13 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import homeImg from "../../public/assets/home-1392-svgrepo-com.svg";
-import person from "../../public/assets/picture.png";
 import logo from "../../public/assets/logo-rumah-sakit.png";
 import { FaPerson, FaBedPulse, FaIdCardClip } from "react-icons/fa6";
 import { MdOutlineLocalHospital } from "react-icons/md";
 import { usePathname } from "next/navigation";
+import { Profil } from "./profil";
 
 const Slidebar = () => {
   const pathname = usePathname();
@@ -44,17 +45,7 @@ const Slidebar = () => {
           </Link>
           <p className="hidden md:flex">Rumah Sakit Kasih Bunda</p>
         </div>
-        <div className="md:grid grid-rows-2 grid-flow-col items-center justify-start px-1 mt-10 text-xs">
-          <Image
-            src={person}
-            alt="iconInap"
-            className="md:w-10 w-8 rounded-full md:row-span-2"
-          />
-          <div className="pl-2 hidden md:inline truncate">
-            Wismoyo Bagas Laksono asdfk adfjdfe jasd
-          </div>
-          <div className="pl-2 hidden md:inline truncate">Rekam Medis</div>
-        </div>
+        <Profil />
         <Link
           className="flex justify-start mt-5 items-center h-10 w-full mb-1 px-2 hover:bg-neutral text-sm"
           href={"/"}
