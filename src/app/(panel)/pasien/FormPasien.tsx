@@ -1,13 +1,13 @@
 "use client";
-import { useState } from "react";
 import Modal from "@/components/Modal";
-import { useRouter } from "next/navigation";
-import NormAuto from "../../libs/normAuto";
+import NormAuto from "../../../libs/normAuto";
 import { useForm, SubmitHandler } from "react-hook-form";
 import type { Pasien } from "@/interface/formTypes";
 import moment from "moment";
 import Alert from "@/components/Alert";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const legions = [
   { id: 1, name: "Islam" },
@@ -36,7 +36,7 @@ const golonganDarah = [
   { id: 4, name: "AB" },
 ];
 
-const Pasien = () => {
+export default function FormPasien() {
   const router = useRouter();
 
   const [alert, setAlert] = useState(false);
@@ -110,13 +110,13 @@ const Pasien = () => {
           no_asuransi: data.noAsuransi,
           ibu_kandung: data.ibuKandung,
         });
+        setTimeout(() => {
+          setAlert(true);
+        }, 1000);
       } catch (error) {
         console.log("Error:", error);
       } finally {
         handleModalClose();
-        setTimeout(() => {
-          setAlert(true);
-        }, 1000);
         router.refresh();
       }
     } else {
@@ -128,7 +128,7 @@ const Pasien = () => {
     <div className="">
       <form
         action=""
-        className="w-full outline outline-1 p-3 m-auto"
+        className="w-full outline outline-1 p-3 m-auto bg-base-200 outline-base-content"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="md:grid md:grid-cols-2 md:gap-3">
@@ -138,21 +138,19 @@ const Pasien = () => {
                 <div
                   className={
                     errors.namaLengkap?.type === "required"
-                      ? "p-1 border border-red-600 relative rounded-md"
-                      : "p-1 border border-black relative rounded-md"
+                      ? "div-input"
+                      : "div-input-error"
                   }
                 >
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Nama Lengkap
-                  </h2>
+                  <h2 className="label-input">Nama Lengkap</h2>
                   <input
                     {...register("namaLengkap", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.namaLengkap?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
@@ -161,22 +159,20 @@ const Pasien = () => {
                 <div
                   className={
                     errors.idIdentitas?.type === "required"
-                      ? "p-1 border border-red-600 relative rounded-md"
-                      : "p-1 border border-black relative rounded-md"
+                      ? "div-input"
+                      : "div-input-error"
                   }
                 >
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    KTP/SIM
-                  </h2>
+                  <h2 className="label-input">KTP/SIM</h2>
                   <input
                     {...register("idIdentitas", { required: true })}
                     type="text"
                     aria-invalid="true"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.idIdentitas?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
@@ -187,9 +183,9 @@ const Pasien = () => {
                   type="checkbox"
                   value={"WNA"}
                   name="wna"
-                  className="mr-1"
+                  className="mr-1 bg-red-500"
                 />
-                <label htmlFor="" className="text-sm text-gray-600">
+                <label htmlFor="" className="text-sm text-base-content">
                   WNA
                 </label>
               </div>
@@ -199,21 +195,19 @@ const Pasien = () => {
                 <div
                   className={
                     errors.tmptLahir?.type === "required"
-                      ? "p-1 border border-red-600 relative rounded-md"
-                      : "p-1 border border-black relative rounded-md"
+                      ? "div-input"
+                      : "div-input-error"
                   }
                 >
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Tmpt Lahir
-                  </h2>
+                  <h2 className="label-input">Tmpt Lahir</h2>
                   <input
                     {...register("tmptLahir", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.tmptLahir?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
@@ -222,57 +216,49 @@ const Pasien = () => {
                 <div
                   className={
                     errors.tglLahir?.type === "required"
-                      ? "p-1 border border-red-600 relative rounded-md"
-                      : "p-1 border border-black relative rounded-md"
+                      ? "div-input"
+                      : "div-input-error"
                   }
                 >
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Tgl Lahir
-                  </h2>
+                  <h2 className="label-input">Tgl Lahir</h2>
                   <input
                     {...register("tglLahir", { required: true })}
                     type="date"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                     onChange={handleAge}
                   />
                 </div>
                 {errors.tglLahir?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
               </div>
             </div>
             <div className="flex gap-3">
-              <div className="p-1 border border-black relative rounded-md mt-1 mb-3 w-1/6 opacity-50">
-                <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                  Tahun
-                </h2>
+              <div className="div-input-error mt-1 mb-3 w-1/6 opacity-50">
+                <h2 className="label-input">Tahun</h2>
                 <input
                   type="text"
-                  className="outline-none w-full text-sm text-center"
+                  className="outline-none w-full text-sm text-center bg-base-200 text-base-content"
                   value={tahun}
                   readOnly={true}
                 />
               </div>
-              <div className="p-1 border border-black relative rounded-md mt-1 mb-3 w-1/6 opacity-50">
-                <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                  Bulan
-                </h2>
+              <div className="div-input-error mt-1 mb-3 w-1/6 opacity-50">
+                <h2 className="label-input">Bulan</h2>
                 <input
                   type="text"
-                  className="outline-none w-full text-sm text-center"
+                  className="outline-none w-full text-sm text-center bg-base-200 text-base-content"
                   value={bulan}
                   readOnly={true}
                 />
               </div>
-              <div className="p-1 border border-black relative rounded-md mt-1 mb-3 w-1/6 opacity-50">
-                <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                  Hari
-                </h2>
+              <div className="div-input-error mt-1 mb-3 w-1/6 opacity-50">
+                <h2 className="label-input">Hari</h2>
                 <input
                   type="text"
-                  className="outline-none w-full text-sm text-center"
+                  className="outline-none w-full text-sm text-center bg-base-200 text-base-content"
                   value={hari}
                   readOnly={true}
                 />
@@ -280,13 +266,17 @@ const Pasien = () => {
             </div>
             <div className="flex gap-3">
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/3 bg-white text-gray-600 text-sm">
-                    J Kelamin
-                  </h2>
+                <div
+                  className={
+                    errors.jenisKelamin?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-select-input">J Kelamin</h2>
                   <select
                     {...register("jenisKelamin", { required: true })}
-                    className="select select-sm w-full max-w-xs text-sm border-none focus:ring-0 focus:border-transparent focus:outline-none rounded-lg"
+                    className="select-input"
                   >
                     <option value="">-</option>
                     {jenisKelamin.map((item) => (
@@ -297,19 +287,23 @@ const Pasien = () => {
                   </select>
                 </div>
                 {errors.jenisKelamin?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md ">
-                  <h2 className="absolute -top-1/2 translate-y-1/3 bg-white text-gray-600 text-sm">
-                    Darah
-                  </h2>
+                <div
+                  className={
+                    errors.golDarah?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-select-input">Darah</h2>
                   <select
                     {...register("golDarah", { required: true })}
-                    className="select select-sm w-full max-w-xs text-sm border-none focus:ring-0 focus:border-transparent focus:outline-none rounded-lg"
+                    className="select-input"
                   >
                     <option value="">-</option>
                     {golonganDarah.map((item) => (
@@ -320,7 +314,7 @@ const Pasien = () => {
                   </select>
                 </div>
                 {errors.golDarah?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
@@ -328,13 +322,17 @@ const Pasien = () => {
             </div>
             <div className="flex gap-3">
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/3 bg-white text-gray-600 text-sm">
-                    Agama
-                  </h2>
+                <div
+                  className={
+                    errors.agama?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-select-input">Agama</h2>
                   <select
                     {...register("agama", { required: true })}
-                    className="select select-sm w-full max-w-xs text-sm border-none focus:ring-0 focus:border-transparent focus:outline-none rounded-lg"
+                    className="select-input"
                   >
                     <option value="">-</option>
                     {legions.map((item) => (
@@ -345,19 +343,23 @@ const Pasien = () => {
                   </select>
                 </div>
                 {errors.agama?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/3 bg-white text-gray-600 text-sm">
-                    Status Nikah
-                  </h2>
+                <div
+                  className={
+                    errors.nikah?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-select-input">Status Nikah</h2>
                   <select
                     {...register("nikah", { required: true })}
-                    className="select select-sm w-full max-w-xs text-sm border-none focus:ring-0 focus:border-transparent focus:outline-none rounded-lg"
+                    className="select-input"
                   >
                     <option value="">-</option>
                     {statusNikah.map((item) => (
@@ -368,7 +370,7 @@ const Pasien = () => {
                   </select>
                 </div>
                 {errors.nikah?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
@@ -376,52 +378,64 @@ const Pasien = () => {
             </div>
             <div className="flex gap-3">
               <div className="mt-1 mb-3 w-1/2">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Alamat
-                  </h2>
+                <div
+                  className={
+                    errors.alamat?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Alamat</h2>
                   <input
                     {...register("alamat", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.alamat?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    RT
-                  </h2>
+                <div
+                  className={
+                    errors.rt?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">RT</h2>
                   <input
                     {...register("rt", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.rt?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    RW
-                  </h2>
+                <div
+                  className={
+                    errors.rw?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">RW</h2>
                   <input
                     {...register("rw", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.rw?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
@@ -429,35 +443,43 @@ const Pasien = () => {
             </div>
             <div className="flex gap-3">
               <div className="mt-1 mb-3 w-1/2">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Provinsi
-                  </h2>
+                <div
+                  className={
+                    errors.provinsi?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Provinsi</h2>
                   <input
                     {...register("provinsi", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.provinsi?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/2">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Kota
-                  </h2>
+                <div
+                  className={
+                    errors.kota?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Kota</h2>
                   <input
                     {...register("kota", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.kota?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *Tidak boleh kosong!
                   </p>
                 )}
@@ -465,35 +487,43 @@ const Pasien = () => {
             </div>
             <div className="flex gap-3">
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Kelurahan
-                  </h2>
+                <div
+                  className={
+                    errors.kelurahan?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Kelurahan</h2>
                   <input
                     {...register("kelurahan", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.kelurahan?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Kecamatan
-                  </h2>
+                <div
+                  className={
+                    errors.kecamatan?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Kecamatan</h2>
                   <input
                     {...register("kecamatan", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.kecamatan?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *tidak boleh kosong!
                   </p>
                 )}
@@ -501,52 +531,64 @@ const Pasien = () => {
             </div>
             <div className="flex gap-3">
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Pekerjaan
-                  </h2>
+                <div
+                  className={
+                    errors.pekerjaan?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Pekerjaan</h2>
                   <input
                     {...register("pekerjaan", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.pekerjaan?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Pendidikan
-                  </h2>
+                <div
+                  className={
+                    errors.pendidikan?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Pendidikan</h2>
                   <input
                     {...register("pendidikan", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.pendidikan?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *tidak boleh kosong!
                   </p>
                 )}
               </div>
               <div className="mt-1 mb-3 w-1/3">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    No. Telepon
-                  </h2>
+                <div
+                  className={
+                    errors.noTlp?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">No. Telepon</h2>
                   <input
                     {...register("noTlp", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
                 {errors.noTlp?.type === "required" && (
-                  <p role="alert" className="text-xs text-red-600">
+                  <p role="alert" className="label-input-error">
                     *tidak boleh kosong!
                   </p>
                 )}
@@ -556,36 +598,49 @@ const Pasien = () => {
           <div>
             <div className="flex gap-3">
               <div className="mt-1 mb-3 w-1/2">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    No. Asuransi
-                  </h2>
+                <div
+                  className={
+                    errors.noAsuransi?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">No. Asuransi</h2>
                   <input
                     {...register("noAsuransi")}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
               </div>
               <div className="mt-1 mb-3 w-1/2">
-                <div className="p-1 border border-black relative rounded-md">
-                  <h2 className="absolute -top-1/2 translate-y-1/4 bg-white text-gray-600 text-sm">
-                    Nama Ibu
-                  </h2>
+                <div
+                  className={
+                    errors.ibuKandung?.type === "required"
+                      ? "div-input"
+                      : "div-input-error"
+                  }
+                >
+                  <h2 className="label-input">Nama Ibu</h2>
                   <input
-                    {...register("ibuKandung")}
+                    {...register("ibuKandung", { required: true })}
                     type="text"
-                    className="outline-none w-full text-sm"
+                    className="text-input"
                   />
                 </div>
+                {errors.ibuKandung?.type === "required" && (
+                  <p role="alert" className="label-input-error">
+                    *tidak boleh kosong!
+                  </p>
+                )}
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <button className="btn btn-info text-gray-700 btn-md">
+              <button className="btn btn-info text-base-200 btn-md">
                 Simpan
               </button>
               <button
-                className="btn btn-error text-gray-700"
+                className="btn btn-error text-base-200"
                 type="reset"
                 onClick={() => reset()}
               >
@@ -624,6 +679,4 @@ const Pasien = () => {
       )}
     </div>
   );
-};
-
-export default Pasien;
+}

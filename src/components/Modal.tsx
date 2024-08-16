@@ -22,7 +22,7 @@ const Modal = ({
 
   return (
     <div
-      className="transition ease-in-out delay-150 fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center"
+      className="transition ease-in-out delay-1000 fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
       onClick={handleOutsideClick}
     >
       <div className="modal-box">
@@ -36,4 +36,3 @@ const Modal = ({
 };
 
 export default Modal;
-

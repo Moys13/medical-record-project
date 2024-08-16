@@ -1,5 +1,6 @@
+"use client";
 import Navbar from "@/components/navbar";
-import Slidebar from "@/components/Slidebar";
+import Slidebar from "@/components/slidebar/Slidebar";
 
 export default function PanelLayout({
   children,
@@ -7,14 +8,14 @@ export default function PanelLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-hidden">
+    <section className="overflow-hidden" data-theme="dark">
       <Navbar />
       <div className="flex">
         <Slidebar />
-        <div className="p-5 h-[calc(100vh-3rem)] overflow-auto w-full">
+        <div className="p-5 h-[calc(100vh-3rem)] overflow-auto w-full bg-base-100">
           {children}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

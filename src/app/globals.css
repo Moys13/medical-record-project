@@ -12,6 +12,27 @@
   .card-dashboard {
     @apply bg-blue-700 md:h-fit h-16 rounded-xl md:p-3 py-3 md:text-base;
   }
+  .div-input {
+    @apply p-1 border border-error relative rounded-md;
+  }
+  .div-input-error {
+    @apply p-1 border border-base-content relative rounded-md;
+  }
+  .label-input {
+    @apply absolute -top-1/2 translate-y-1/4 bg-base-200 text-base-content text-sm;
+  }
+  .label-select-input {
+    @apply absolute -top-1/2 translate-y-1/3 bg-base-200 text-base-content text-sm;
+  }
+  .label-input-error {
+    @apply text-xs text-error;
+  }
+  .text-input {
+    @apply outline-none w-full text-sm bg-base-200 text-base-content;
+  }
+  .select-input {
+    @apply select select-sm w-full max-w-xs text-sm border-none focus:ring-0 focus:border-transparent focus:outline-none rounded-lg bg-base-200 text-base-content;
+  }
 }
 
 html {

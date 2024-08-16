@@ -11,7 +11,7 @@ export default function LoadingSkeleton() {
       </div>
       <div className=" rounded-md overflow-x-auto">
         <table className="border m-auto shadow-md table table-xs table-zebra">
-          <thead className="text-sm bg-slate-300 text-left border-b-2 border-slate-500">
+          <thead className="text-sm bg-base-content text-base-100 text-left border-b-3 border-base-content">
             <tr className="">
               <th className="px-2 py-1">No RM</th>
               <th className="px-2 py-1">NIK</th>

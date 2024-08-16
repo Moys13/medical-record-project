@@ -1,6 +1,9 @@
+import generateRandomString from "@/libs/randomString";
 import axios from "axios";
+import { url } from "inspector";
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { redirect } from "next/dist/server/api-utils";
 
 export const authOption: NextAuthOptions = {
   session: {
@@ -39,7 +42,10 @@ export const authOption: NextAuthOptions = {
           const user = res.data;
 
           if (user.statusCode === 200) {
-            return user.data;
+            return {
+              ...user.data,
+              randomKey: generateRandomString(),
+            };
           }
         } catch (error) {
           return null;
@@ -47,27 +53,34 @@ export const authOption: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+    signOut: "/",
+  },
   callbacks: {
     session: ({ session, token }) => {
-      console.log("session", session);
       return {
         ...session,
         user: {
           ...session.user,
           id: token.id,
+          randomKey: token.randomKey,
         },
       };
     },
     jwt: ({ token, user }) => {
       if (user) {
-        const test = user as unknown as any;
+        const data = user as unknown as any;
         return {
           ...token,
-          id: test.id,
-          randomkey: test.randomkey,
+          id: data.id,
+          randomKey: data.randomKey,
         };
       }
       return token;
+    },
+    redirect: ({ url, baseUrl }) => {
+      return `${baseUrl}/dashboard`;
     },
   },
 };

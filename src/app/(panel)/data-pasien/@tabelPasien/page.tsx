@@ -13,14 +13,14 @@ const TablePasien = async () => {
       <div className="flex justify-center py-3">
         <input
           type="text"
-          className="border-2 border-gray-500 rounded-md text-sm px-1"
+          className="border-2 borde-base-content rounded-md text-sm px-1"
           placeholder="Cari NIK/Nama/Norm"
         />
         <button className="btn btn-info btn-sm font-normal ml-2">Cari</button>
       </div>
       <div className=" rounded-md overflow-x-auto">
         <table className="border m-auto shadow-md table table-xs table-zebra">
-          <thead className="text-sm bg-slate-300 text-left border-b-2 border-slate-500">
+          <thead className="text-sm bg-base-content text-base-100 text-left border-b-3 border-base-content">
             <tr className="">
               <th className="px-2 py-1">No RM</th>
               <th className="px-2 py-1">NIK</th>

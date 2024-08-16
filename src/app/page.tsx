@@ -1,56 +1,44 @@
-'use client'
-import Image from "next/image";
-import pasienImg from "../../public/assets/patient-svgrepo-com.svg";
+"use client";
 
-const Dashboard = () => {
+import Modal from "@/components/Modal";
+import generateRandomString from "@/libs/randomString";
+import { getServerSession } from "next-auth";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { authOption } from "./api/auth/[...nextauth]/route";
+import Link from "next/link";
+
+const Main = () => {
   return (
-    <main className="max-w-screen-xl min-w-full">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 grid-flow-row gap-3 text-slate-100">
-        <div className="card-dashboard flex">
-          <Image
-            src={pasienImg}
-            alt="bgimage"
-            className="md:w-16 w-10 opacity-50 mx-1 md:mx-0"
-          />
-          <div className="grid grid-rows-2 md:my-auto">
-            <p className="text-phone-md md:text-base">Data pasien</p>
-            <p className="text-phone-sm md:text-xs">
-              Data pasien terdaftar di rumah sakit
-            </p>
-          </div>
-        </div>
-        <div className="card-dashboard flex">
-          <Image
-            src={pasienImg}
-            alt="bgimage"
-            className="md:w-16 w-10 opacity-50 mx-1 md:mx-0"
-          />
-          <div className="grid grid-rows-2 md:my-auto">
-            <p className="text-phone-md md:text-base">Data pasien</p>
-            <p className="text-phone-sm md:text-xs">
-              Data pasien terdaftar di rumah sakit
-            </p>
-          </div>
-        </div>
-        <div className="card-dashboard flex">
-          <Image
-            src={pasienImg}
-            alt="bgimage"
-            className="md:w-16 w-10 opacity-50 mx-1 md:mx-0"
-          />
-          <div className="grid grid-rows-2 md:my-auto">
-            <p className="text-phone-md md:text-base">Data pasien</p>
-            <p className="text-phone-sm md:text-xs">
-              Data pasien terdaftar di rumah sakit
-            </p>
-          </div>
+    <section
+      className="hero min-h-screen w-screen"
+      style={{
+        backgroundImage:
+          "url(https://indonesiaartikel.com/wp-content/uploads/2019/06/rumah-sakit-jakarta.jpg)",
+      }}
+    >
+      <div className="hero-overlay bg-opacity-75"></div>
+      <div className="hero-content text-neutral-content text-center">
+        <div className="max-w-2xl">
+          <h1 className="mb-5 text-5xl font-bold">
+            Selamat Datang Di Rumah Sakit Kasih Bunda
+          </h1>
+          <p className="mb-5">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum
+            rerum fugiat tempora dolore quasi sed deleniti ratione eaque, nihil
+            placeat repudiandae quis minus doloremque reiciendis repellendus
+            voluptatem assumenda error amet molestiae omnis soluta! Ratione
+            molestiae in accusamus reiciendis, optio quam maxime deleniti fugit
+            ducimus et temporibus perspiciatis placeat iste autem.
+          </p>
+          <Link href="/login">
+            <button className="btn">Login</button>
+          </Link>
         </div>
       </div>
-      <div className="grid grid-cols-2">
-        <div className="">kdjsafkj</div>
-        <div>kdjsafkj asdklfjsklfj</div>
-      </div>
-    </main>
+    </section>
   );
 };
-export default Dashboard;
+
+export default Main;
