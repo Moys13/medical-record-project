@@ -2,7 +2,6 @@ import ApiResponseHandle from "@/libs/apiResponseHandle";
 import { PrismaClient, user } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { compare } from "bcrypt";
-import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 export const POST = async (req: Request) => {

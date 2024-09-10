@@ -1,9 +1,15 @@
 import type { pasien } from "@prisma/client";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const getPastients = async () => {
-  const response = await axios.get("http://localhost:3000/api/pasien");
-  return response.data;
+  try {
+    const response = await axios.get("http://localhost:3000/api/pasien");
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      return error.status;
+    }
+  }
 };
 
 const TablePasien = async () => {
@@ -32,9 +38,7 @@ const TablePasien = async () => {
               <th className="px-2 py-1">Action</th>
             </tr>
           </thead>
-          {patients.statusCode === 500 ||
-          patients.statusCode === 404 ||
-          patients.statusCode === 401 ? (
+          {patients === 500 || patients === 404 || patients === 401 ? (
             <tbody>
               <tr>
                 <td className="text-center" colSpan={8}>

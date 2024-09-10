@@ -1,5 +1,6 @@
 import generateRandomString from "@/libs/randomString";
 import axios from "axios";
+import { hash } from "bcrypt";
 import { url } from "inspector";
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -39,6 +40,7 @@ export const authOption: NextAuthOptions = {
             },
           );
 
+          const pesan = await hash("admin", 10)
           const user = res.data;
 
           if (user.statusCode === 200) {
@@ -48,6 +50,8 @@ export const authOption: NextAuthOptions = {
             };
           }
         } catch (error) {
+
+          console.log("kontoll")
           return null;
         }
       },

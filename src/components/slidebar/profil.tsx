@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export const Profil = () => {
   const { data: session } = useSession();
-  console.log(session);
   return (
     <div className="md:grid grid-rows-2 grid-flow-col items-center justify-start px-1 mt-10 text-xs cursor-pointer">
       <Image

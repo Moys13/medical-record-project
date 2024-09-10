@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/libs/db";
 import type { pasien } from "@prisma/client";
 import ApiResponseHandle from "@/libs/apiResponseHandle";
-import moment from "moment";
 
 const delay = () => new Promise<void>((res) => setTimeout(() => res(), 5000));
 

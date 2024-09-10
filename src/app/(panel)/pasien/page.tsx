@@ -1,3 +1,4 @@
+"use client";
 import FormPasien from "./FormPasien";
 import Regulation from "./Regulation";
 
