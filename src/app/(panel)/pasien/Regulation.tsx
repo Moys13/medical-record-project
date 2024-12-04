@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default async function Regulation() {
+export default function Regulation() {
   const [collapse, SetCollapse] = useState(false);
   const handleCollapse = () => {
     if (collapse) {

@@ -7,7 +7,7 @@ const getPastients = async () => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      return error.status;
+      return { error: error.message };
     }
   }
 };
@@ -38,7 +38,7 @@ const TablePasien = async () => {
               <th className="px-2 py-1">Action</th>
             </tr>
           </thead>
-          {patients === 500 || patients === 404 || patients === 401 ? (
+          {!patients.data ? (
             <tbody>
               <tr>
                 <td className="text-center" colSpan={8}>

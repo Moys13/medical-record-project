@@ -39,7 +39,16 @@ const golonganDarah = [
 export default function FormPasien() {
   const router = useRouter();
 
-  const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState<{
+    active: boolean;
+    message?: string;
+    type?: "success" | "warning" | "info" | "error";
+  }>({
+    active: false,
+    message: "",
+    type: "success",
+  });
+  const [alertMessage, setAlertMessage] = useState("");
   const [modal, setModal] = useState(false);
   const [tahun, setTahun] = useState(0);
   const [bulan, setBulan] = useState(0);
@@ -111,13 +120,26 @@ export default function FormPasien() {
           ibu_kandung: data.ibuKandung,
         });
         setTimeout(() => {
-          setAlert(true);
+          setAlert({
+            active: true,
+            message: "Data Berhasi Disimpan",
+            type: "success",
+          });
+          <div>hahaha</div>;
         }, 1000);
       } catch (error) {
+        setTimeout(() => {
+          setAlert({
+            active: true,
+            message: "Data Tidak Tersimpan Error*",
+            type: "error",
+          });
+          <div>hahaha</div>;
+        }, 1000);
         console.log("Error:", error);
       } finally {
-        handleModalClose();
         router.refresh();
+        handleModalClose();
       }
     } else {
       setModal(true);
@@ -669,11 +691,11 @@ export default function FormPasien() {
           </div>
         </Modal>
       </form>
-      {alert && (
+      {alert.active && (
         <Alert
-          message="Data Berhasil Disimpan."
-          type="success"
-          onClose={() => setAlert(false)}
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert({ active: false })}
           autoCloseTime={3000}
         />
       )}

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import person from "../../../public/assets/picture.png";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 
 export const Profil = () => {
   const { data: session } = useSession();

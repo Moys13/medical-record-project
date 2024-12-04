@@ -7,8 +7,8 @@ import {
 } from "react-icons/ci";
 
 interface AlertProps {
-  message: string;
-  type: "success" | "warning" | "info" | "error";
+  message?: string;
+  type?: "success" | "warning" | "info" | "error";
   onClose: () => void;
   autoCloseTime?: number;
 }
@@ -48,7 +48,7 @@ export default function Alert({
 
   return (
     <div
-      className={`absolute alert ${alertType} w-1/2 bottom-2 right-4 md:w-1/3 shadow-lg`}
+      className={`absolute alert ${alertType} w-1/2 bottom-2 right-4 md:w-1/3 shadow-lg z-50`}
     >
       {icon}
       <span className="text-xs">{message}</span>
